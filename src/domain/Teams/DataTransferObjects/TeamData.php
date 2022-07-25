@@ -11,9 +11,4 @@ class TeamData extends DataTransferObject
         public string $name,
         public string $description,
     ){}
-
-    public static function formRequest(Request $request): self
-    {
-        return new self(...$request->validated());
-    }
 }

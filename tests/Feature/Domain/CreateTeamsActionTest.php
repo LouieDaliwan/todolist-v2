@@ -27,12 +27,4 @@ class CreateTeamsActionTest extends TestCase
             'description' => 'Teams description',
         ]);
     }
-
-    /** @test */
-    function have_validation_to_create_a_teams()
-    {
-        $this->post('/teams-create', [
-            'description' => 'Teams description'
-        ])->assertSessionHasErrors('name');
-    }
 }

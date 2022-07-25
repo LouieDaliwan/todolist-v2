@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Teams\CreateTeamController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,14 +17,14 @@ use Domain\Teams\Actions\CreateTeamsActions;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 // Route::middleware([
 //     'auth:sanctum',
@@ -37,4 +38,5 @@ Route::get('/', function () {
 
 
 
-Route::post('/teams-create', [CreateTeamsActions::class, 'execute']);
+Route::post('/teams-create', CreateTeamController::class);
+
