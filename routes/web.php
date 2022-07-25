@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Domain\Teams\CreateTeamsActions;
+use Domain\Teams\Actions\CreateTeamsActions;
 
 /*
 |--------------------------------------------------------------------------

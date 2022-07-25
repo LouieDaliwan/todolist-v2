@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Teams;
+namespace Domain\Teams\Actions;
 
 use App\Models\Teams;
 use Illuminate\Http\Request;

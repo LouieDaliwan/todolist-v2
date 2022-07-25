@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class CreateTeamsActionsTest extends TestCase
+class CreateTeamsActionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -26,5 +26,13 @@ class CreateTeamsActionsTest extends TestCase
             'name' => 'Test Teams',
             'description' => 'Teams description',
         ]);
+    }
+
+    /** @test */
+    function have_validation_to_create_a_teams()
+    {
+        $this->post('/teams-create', [
+            'description' => 'Teams description'
+        ])->assertSessionHasErrors('name');
     }
 }
