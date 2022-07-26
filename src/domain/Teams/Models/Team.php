@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace Domain\Teams\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teams extends Model
+class Team extends Model
 {
     use HasFactory;
-
+    
     protected $guarded = [];
 
     protected $table = 'teams';
