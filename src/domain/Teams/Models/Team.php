@@ -7,10 +7,12 @@ use Domain\Teams\Events\TeamCreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Domain\Teams\Models\TeamUser;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Team extends Model
 {
-    use HasFactory;
+    use HasFactory,
+    SoftDeletes;
 
     protected $guarded = [];
 

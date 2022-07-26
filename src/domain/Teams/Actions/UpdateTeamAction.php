@@ -8,9 +8,7 @@ use Domain\Teams\Models\Team;
 
 class UpdateTeamAction
 {
-    public function __construct(){}
-
-    public function execute(Team $team, TeamData $teamData) : Team
+    public function __invoke(Team $team, TeamData $teamData) : Team
     {
         return $team->update([
             'name' => $teamData->name,

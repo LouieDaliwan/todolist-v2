@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class CreateTeamAction
 {
-    public function __construct(){}
-
-    public function execute(TeamData $teamData) : Team
+    public function __invoke(TeamData $teamData) : Team
     {
         return Team::firstOrCreate([
             'name' => $teamData->name,

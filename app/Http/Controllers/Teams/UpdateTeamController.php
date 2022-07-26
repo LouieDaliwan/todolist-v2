@@ -14,6 +14,6 @@ class UpdateTeamController extends Controller
 
     public function __invoke(UpdateTeamRequest $request, Team $team)
     {
-        return $this->updateTeamAction->execute($team, new TeamData(...$request->validated()));
+        return ($this->updateTeamAction)($team, new TeamData(...$request->validated()));
     }
 }
