@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Teams\CreateTeamController;
+use App\Http\Controllers\Teams\UpdateTeamController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,4 +40,5 @@ use Domain\Teams\Actions\CreateTeamsActions;
 
 
 Route::post('/teams-create', CreateTeamController::class);
+Route::put('/teams-update/{team}', UpdateTeamController::class);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Domain;
+namespace Tests\Feature\Domain\Teams;
 
 use App\Models\Teams;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +10,11 @@ use Tests\TestCase;
 class CreateTeamsActionTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function createTeam()
+    {
+        
+    }
 
     /** @test */
     function can_create_a_teams()
