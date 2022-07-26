@@ -11,11 +11,6 @@ class CreateTeamsActionTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function createTeam()
-    {
-        
-    }
-
     /** @test */
     function can_create_a_teams()
     {

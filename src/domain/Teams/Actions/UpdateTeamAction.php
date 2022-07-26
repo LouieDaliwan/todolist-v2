@@ -10,7 +10,7 @@ class UpdateTeamAction
 {
     public function __construct(){}
 
-    public function execute(TeamData $teamData, Team $team) : Team
+    public function execute(Team $team, TeamData $teamData) : Team
     {
         return $team->update([
             'name' => $teamData->name,
