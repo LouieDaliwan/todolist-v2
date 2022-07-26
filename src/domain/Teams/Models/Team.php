@@ -3,6 +3,7 @@
 namespace Domain\Teams\Models;
 
 use App\Models\User;
+use Domain\Teams\Events\TeamCreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Domain\Teams\Models\TeamUser;
@@ -15,17 +16,9 @@ class Team extends Model
 
     protected $table = 'teams';
 
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::created(function ($team) {
-            $team->users()->attach(auth()->user()->id);
-        });
-    }
+    protected $dispatchesEvents = [
+        'created' => TeamCreatedEvent::class
+    ];
 
     public function users()
     {

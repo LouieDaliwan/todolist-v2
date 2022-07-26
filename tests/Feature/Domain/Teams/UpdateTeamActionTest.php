@@ -11,6 +11,13 @@ class UpdateTeamActionTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setup(): void
+    {
+        parent::setup();
+
+        $this->signIn();
+    }
+
     /** @test */
     function can_update_team_details()
     {
