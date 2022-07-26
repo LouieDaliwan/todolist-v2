@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 
 class CreateTeamAction
 {
-    public function __construct()
-    {}
+    public function __construct(){}
 
     public function execute(TeamData $teamData) : Teams
     {
