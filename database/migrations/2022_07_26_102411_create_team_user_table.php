@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('team_user_laravel', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('team_id');
-            $table->foreignId('user_id');
-            $table->string('role')->nullable();
-            $table->timestamps();
+        Schema::create('team_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('team_id')->index();
 
-            $table->unique(['team_id', 'user_id']);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 
