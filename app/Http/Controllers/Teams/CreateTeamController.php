@@ -10,6 +10,7 @@ use Domain\Teams\Models\Team;
 
 class CreateTeamController extends Controller
 {
+
     public function __construct(public CreateTeamAction $createTeamAction){}
 
     public function __invoke(CreateTeamRequest $request): Team
