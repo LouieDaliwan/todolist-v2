@@ -13,7 +13,7 @@ class RemoveUser
     {
         $team = $event->team;
 
-        $team->users()->detach(auth()->user()->id);
+        $team->users()->detach();
     }
 
     public function subscribe(Dispatcher $dispatcher)

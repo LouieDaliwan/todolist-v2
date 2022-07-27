@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use Database\Factories\Contract\Factory;
 use App\Models\User;
 use Domain\Teams\Models\Team;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TeamFactory
+class TeamFactory extends Factory
 {
     public static function new(): self
     {
@@ -19,5 +19,18 @@ class TeamFactory
             'name' => 'Test Team',
             'description' => 'Test Description'
         ], $extra));
+    }
+
+    public function withUsersCreate(int $times) : Team
+    {
+        $team = $this->create();
+
+        $users = User::factory()->count($times)->create();
+
+        $users->map(function($user) use ($team) {
+            $team->users()->attach($user->id);
+        });
+
+        return $team;
     }
 }

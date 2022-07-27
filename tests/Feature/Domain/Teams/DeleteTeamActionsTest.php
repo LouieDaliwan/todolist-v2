@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Domain\Teams;
 
+use App\Models\User;
 use Database\Factories\TeamFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -36,10 +37,11 @@ class DeleteTeamActionsTest extends TestCase
     /** @test */
     function when_deleting_a_team_it_removes_the_users()
     {
-        $team = TeamFactory::new()->create(['name' => 'Test Team Delete']);
+        $team = TeamFactory::new()->withUsersCreate(10);
 
         $this->delete("/teams-delete/{$team->id}");
 
+        //assert when deleting the team users will detach.
         $this->assertCount(0, $team->users);
     }
 }
