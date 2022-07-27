@@ -31,4 +31,15 @@ class DeleteTeamActionsTest extends TestCase
             'description' => $team->description,
         ]);
     }
+
+
+    /** @test */
+    function when_deleting_a_team_it_removes_the_users()
+    {
+        $team = TeamFactory::new()->create(['name' => 'Test Team Delete']);
+
+        $this->delete("/teams-delete/{$team->id}");
+
+        $this->assertCount(0, $team->users);
+    }
 }

@@ -4,6 +4,7 @@ namespace Domain\Teams\Models;
 
 use App\Models\User;
 use Domain\Teams\Events\TeamCreatedEvent;
+use Domain\Teams\Events\TeamDeletingEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Domain\Teams\Models\TeamUser;
@@ -19,7 +20,8 @@ class Team extends Model
     protected $table = 'teams';
 
     protected $dispatchesEvents = [
-        'created' => TeamCreatedEvent::class
+        'created' => TeamCreatedEvent::class,
+        'deleting' => TeamDeletingEvent::class,
     ];
 
     public function users()
