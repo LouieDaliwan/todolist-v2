@@ -22,7 +22,7 @@ class InviteTeamUsersAction
 
         if (! empty($segregateUser['registered_user'])) {
 
-            $this->sendTeamInvitationAction->onQueue()
+            $this->sendTeamInvitationAction->onQueue("team-invitation-{$team->id}")
             ->execute($segregateUser['registered_user'], $team);
 
         }

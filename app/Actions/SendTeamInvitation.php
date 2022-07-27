@@ -2,8 +2,8 @@
 
 namespace App\Actions;
 
-use App\Models\TeamInvitation;
-use Domain\Teams\Actions\TeamInvitationAction;
+
+use App\Mail\TeamInvitation;
 use Domain\Teams\Models\Team;
 use Illuminate\Support\Facades\Mail;
 use Spatie\QueueableAction\QueueableAction;
@@ -26,8 +26,11 @@ class SendTeamInvitation
      */
     public function execute(array $attributes, Team $team)
     {
+        logger('before iteration');
         collect($attributes)->map(function($item) use ($team) {
-            Mail::to($item['email'])->send(new TeamInvitationAction($team));
+            logger($item['email']);
+            Mail::to($item['email'])->send(new TeamInvitation($team));
+            logger('email sent');
         });
     }
 }

@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Bus;
 use Spatie\QueueableAction\Testing\QueueableActionFake;
 use Illuminate\Support\Facades\Queue;
-
-
 use Tests\TestCase;
 
 class InviteUsersActionTest extends TestCase
@@ -30,7 +28,6 @@ class InviteUsersActionTest extends TestCase
     /** @test */
     function team_user_can_invite_registered_user_attach_without_project()
     {
-        Mail::fake();
         Queue::fake();
 
         //create a team
@@ -50,8 +47,6 @@ class InviteUsersActionTest extends TestCase
 
         //assert that job dispatch is successful
         QueueableActionFake::assertPushed(SendTeamInvitation::class);
-
-        //assert that email was sent to the user
-        Mail::assertSent(TeamInvitationAction::class);
+        QueueableActionFake::assertPushedTimes(SendTeamInvitation::class, 1);
     }
 }
