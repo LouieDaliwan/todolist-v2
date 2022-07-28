@@ -19,17 +19,36 @@ class LeaveUsersTeamTest extends TestCase
         $this->signIn();
     }
 
-    /** @test */
-    function a_user_can_leave_on_a_team()
+    protected function createTeamAndUser(): array
     {
         $user = User::factory()->create();
 
         $team = TeamFactory::new()->withSignInUser($user);
 
-        $this->signIn($user);
+        return [
+            'team' => $team,
+            'user' => $user,
+        ];
+    }
+    /** @test */
+    function a_user_can_leave_on_a_team()
+    {
+        $arr = $this->createTeamAndUser();
 
-        $this->delete("/teams/{$team->id}/leave-users/{$user->id}");
+        $this->signIn($arr['user']);
 
-        $this->assertCount(1, $team->users);
+        $this->delete("/teams/{$arr['team']->id}/leave-users/{$arr['user']->id}");
+
+        $this->assertCount(1, $arr['team']->users);
+    }
+
+    /** @test */
+    function only_authenticated_user_can_leave_to_the_team()
+    {
+        $arr = $this->createTeamAndUser();
+
+        $this->delete("/teams/{$arr['team']->id}/leave-users/{$arr['user']->id}");
+
+        $this->assertCount(2, $arr['team']->users);
     }
 }

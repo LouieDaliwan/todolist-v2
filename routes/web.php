@@ -21,12 +21,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth'])->group(function() {
     Route::post('/teams-create', CreateTeamController::class);
     Route::put('/teams-update/{team}', UpdateTeamController::class);
     Route::delete('/teams-delete/{team}', DeleteTeamController::class);
 
     Route::post("/teams/{team}/invite-users", InviteTeamUsersController::class);
-    Route::delete("/teams/{team}/leave-users/{user}", LeaveTeamUsersController::class);
+    Route::delete("/teams/{team}/leave-users/{user}", LeaveTeamUsersController::class)
+    ->middleware('auth.leaveTeam')
+    ->name('leave-team');
 });
 
