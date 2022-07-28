@@ -5,7 +5,7 @@ namespace Domain\Teams\Listeners;
 use Domain\Teams\Events\TeamCreatedEvent;
 use Illuminate\Events\Dispatcher;
 
-class InviteUser
+class AttachOwner
 {
     public function __construct(){}
 

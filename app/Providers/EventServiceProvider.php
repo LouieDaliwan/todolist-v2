@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Domain\Teams\Listeners\InviteUser;
+use Domain\Teams\Listeners\AttachOwner;
 use Domain\Teams\Listeners\RemoveUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -33,7 +33,7 @@ class EventServiceProvider extends ServiceProvider
     }
 
     protected $subscribe = [
-        InviteUser::class,
+        AttachOwner::class,
         RemoveUser::class,
     ];
 
