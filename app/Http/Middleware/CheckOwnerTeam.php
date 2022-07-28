@@ -18,7 +18,7 @@ class CheckOwnerTeam
      */
     public function handle(Request $request, Closure $next)
     {
-        $team = Team::find($request->team)->first();
+        $team = Team::find($request->team->id);
 
         if (! $team->isOwner(auth()->user())) {
             throw new InvalidOwnerTeamException();
