@@ -30,7 +30,8 @@ Route::middleware(['auth'])->group(function() {
 
     //actions for team users
     Route::post("/teams/{team}/invite-users", InviteTeamUsersController::class);
-    Route::put("/teams/{team}/remove-users", RemoveTeamUsersController::class);
+    Route::put("/teams/{team}/remove-users", RemoveTeamUsersController::class)->middleware('check.owner')
+    ->name('team-users-remove');
     Route::delete("/teams/{team}/leave-users/{user}", LeaveTeamUsersController::class)
     ->middleware('auth.leaveTeam')
     ->name('leave-team');

@@ -26,11 +26,8 @@ class SendTeamInvitation
      */
     public function execute(array $attributes, Team $team)
     {
-        logger('before iteration');
         collect($attributes)->map(function($item) use ($team) {
-            logger($item['email']);
             Mail::to($item['email'])->send(new TeamInvitation($team));
-            logger('email sent');
         });
     }
 }

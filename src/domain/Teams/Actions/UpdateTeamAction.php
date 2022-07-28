@@ -10,9 +10,10 @@ class UpdateTeamAction
 {
     public function __invoke(Team $team, TeamData $teamData) : Team
     {
-        return $team->update([
+        $team->update([
             'name' => $teamData->name,
             'description' => $teamData->description
         ]);
+        return $team;
     }
 }
