@@ -3,7 +3,8 @@
 use App\Http\Controllers\Teams\CreateTeamController;
 use App\Http\Controllers\Teams\UpdateTeamController;
 use App\Http\Controllers\Teams\DeleteTeamController;
-use App\Http\Controllers\Teams\InviteUsersController;
+use App\Http\Controllers\Teams\InviteTeamUsersController;
+use App\Http\Controllers\Teams\LeaveTeamUsersController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function() {
     Route::put('/teams-update/{team}', UpdateTeamController::class);
     Route::delete('/teams-delete/{team}', DeleteTeamController::class);
 
-    Route::post("/teams/{team}/invite-users", InviteUsersController::class);
+    Route::post("/teams/{team}/invite-users", InviteTeamUsersController::class);
+    Route::delete("/teams/{team}/leave-users/{user}", LeaveTeamUsersController::class);
 });
 

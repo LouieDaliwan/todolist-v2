@@ -7,7 +7,7 @@ use Domain\Teams\Actions\InviteTeamUsersAction;
 use Domain\Teams\Models\Team;
 use Illuminate\Http\Request;
 
-class InviteUsersController extends Controller
+class InviteTeamUsersController extends Controller
 {
     public function __construct(public InviteTeamUsersAction $inviteTeamUsersAction){}
 

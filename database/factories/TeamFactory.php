@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Database\Factories\Contract\Factory;
 use App\Models\User;
+use Database\Factories\Contract\Factory;
 use Domain\Teams\Models\Team;
 
 class TeamFactory extends Factory
@@ -30,6 +30,15 @@ class TeamFactory extends Factory
         $users->map(function($user) use ($team) {
             $team->users()->attach($user->id);
         });
+
+        return $team;
+    }
+
+    public function withSignInUser($auth)
+    {
+        $team = $this->create();
+
+        $team->users()->attach($auth->id);
 
         return $team;
     }
