@@ -36,6 +36,6 @@ class Team extends Model
         ->wherePivot('user_id', $user->id)
         ->first()
         ->pivot
-        ->is_owner;
+        ->is_owner ?? false;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Domain\Teams\Users;
 
+use App\Models\User;
 use Database\Factories\TeamFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -28,5 +29,22 @@ class RemoveSelectedUsersActionTest extends TestCase
         ]);
 
         $this->assertCount(7, $team->users);
+    }
+
+
+    /** @test */
+    function only_owner_can_remove_selected_user()
+    {
+        $team = TeamFactory::new()->withUsersCreate(10);
+
+        $user = $team->users()->skip(3)->first();
+
+        $this->signIn($user);
+
+        $this->put("/teams/{$team->id}/remove-users", [
+            'users_id' => ['2', '5']
+        ]);
+
+        $this->assertCount(11, $team->users);
     }
 }
