@@ -13,7 +13,7 @@ class AttachOwner
     {
         $team = $event->team;
 
-        $team->users()->attach(auth()->user()->id);
+        $team->users()->sync([auth()->user()->id, ['is_owner' => true]]);
     }
 
     public function subscribe(Dispatcher $dispatcher)

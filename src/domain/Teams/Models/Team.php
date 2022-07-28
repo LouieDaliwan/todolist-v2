@@ -26,6 +26,16 @@ class Team extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->using(TeamUser::class);
+        return $this->belongsToMany(User::class)->using(TeamUser::class)
+        ->withPivot('team_id', 'user_id', 'is_owner');
+    }
+
+    public function isOwner(User $user)
+    {
+        return $this->users()
+        ->wherePivot('user_id', $user->id)
+        ->first()
+        ->pivot
+        ->is_owner;
     }
 }

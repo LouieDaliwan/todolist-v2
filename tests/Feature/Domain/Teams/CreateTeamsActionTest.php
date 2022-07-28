@@ -37,7 +37,7 @@ class CreateTeamsActionTest extends TestCase
     }
 
     /** @test */
-    function a_creator_of_team_automatically_member()
+    function a_creator_of_team_automatically_owner_and_member()
     {
          $this->post('/teams-create', [
              'description' => 'Teams description',
@@ -46,12 +46,7 @@ class CreateTeamsActionTest extends TestCase
 
          $team = Team::first();
 
+         $this->assertTrue($team->isOwner(auth()->user()));
          $this->assertEquals(1, $team->users->count());
-    }
-
-    /** @test */
-    function a_creator_will_automatically_owner_of_team()
-    {
-        $this->markTestIncomplete();
     }
 }

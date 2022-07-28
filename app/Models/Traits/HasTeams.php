@@ -10,6 +10,7 @@ trait HasTeams
 {
     public function teams()
     {
-        return $this->belongsToMany(Team::class)->using(TeamUser::class);
+        return $this->belongsToMany(Team::class)->using(TeamUser::class)
+        ->withPivot('team_id', 'user_id', 'is_owner');
     }
 }
