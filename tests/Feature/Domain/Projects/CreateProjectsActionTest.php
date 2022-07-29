@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Domain\Projects;
 
+use Database\Factories\ProjectFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -31,5 +32,13 @@ class CreateProjectsActionTest extends TestCase
             'name' => 'Test Sample Project',
             'description' => 'Test Sample Project Description'
         ]);
+    }
+
+    /** @test */
+    function creator_will_be_the_first_member_project()
+    {
+        $project = ProjectFactory::new()->create();
+
+        $this->assertCount(1, $project->users);
     }
 }

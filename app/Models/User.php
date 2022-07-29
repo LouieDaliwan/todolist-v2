@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Traits\HasTeams;
+use Domain\Projects\Models\Project;
+use Domain\Projects\Models\ProjectUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,4 +60,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)->using(ProjectUser::class);
+    }
 }

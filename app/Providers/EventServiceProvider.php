@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Domain\Projects\Listeners\AttachMember;
 use Domain\Teams\Listeners\AttachOwner;
 use Domain\Teams\Listeners\RemoveUser;
 use Illuminate\Auth\Events\Registered;
@@ -35,6 +36,7 @@ class EventServiceProvider extends ServiceProvider
     protected $subscribe = [
         AttachOwner::class,
         RemoveUser::class,
+        AttachMember::class,
     ];
 
     /**
