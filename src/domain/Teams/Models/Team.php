@@ -3,6 +3,7 @@
 namespace Domain\Teams\Models;
 
 use App\Models\User;
+use Domain\Projects\Models\Project;
 use Domain\Teams\Events\TeamCreatedEvent;
 use Domain\Teams\Events\TeamDeletingEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,5 +38,10 @@ class Team extends Model
         ->first()
         ->pivot
         ->is_owner ?? false;
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'team_id', 'id');
     }
 }
