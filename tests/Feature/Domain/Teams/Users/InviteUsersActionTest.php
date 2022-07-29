@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Domain\Teams\Users;
 
+use App\Actions\SendTeamGuestInvitation;
 use App\Actions\SendTeamInvitation;
 
 use App\Models\User;
@@ -26,7 +27,7 @@ class InviteUsersActionTest extends TestCase
     }
 
     /** @test */
-    function team_user_can_invite_registered_user_attach_without_project()
+    function team_member_can_send_invitation_to_join_in_team_without_project()
     {
         Queue::fake();
 
@@ -48,5 +49,33 @@ class InviteUsersActionTest extends TestCase
         //assert that job dispatch is successful
         QueueableActionFake::assertPushed(SendTeamInvitation::class);
         QueueableActionFake::assertPushedTimes(SendTeamInvitation::class, 1);
+    }
+
+    /** @test */
+    function team_member_can_send_invitation_in_a_non_registered_user_to_join_in_team_without_project()
+    {
+        Queue::fake();
+
+        //create a team
+        $team = TeamFactory::new()->create();
+
+        $non_register_user = ['Louie@test.com'];
+
+        //invite request parameters
+        $this->post("/teams/{$team->id}/invite-users", $non_register_user);
+
+        //assert two members in a teams
+        $this->assertCount(2, $team->users);
+
+        //fetch the new created users
+        $user = $team->users()->whereEmail('Louie@test.com')->first();
+
+        $this->assertNotNull($user->invitation_token);
+
+        $this->assertEquals('Pending', $user->invitation_state);
+
+        //assert that job dispatch is successful
+        QueueableActionFake::assertPushed(SendTeamGuestInvitation::class);
+        QueueableActionFake::assertPushedTimes(SendTeamGuestInvitation::class, 1);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Domain\Teams\Actions;
 
+use App\Actions\SendTeamGuestInvitation;
 use App\Actions\SendTeamInvitation;
 use Domain\Teams\Models\Team;
 use Support\Teams\SegregateRegisteredAndNonUser;
@@ -11,7 +12,9 @@ class InviteTeamUsersAction
     public function __construct(
         public SegregateRegisteredAndNonUser $segregateUser,
 
-        public SendTeamInvitation $sendTeamInvitationAction,
+        public SendTeamInvitation $sendTeamInvitation,
+
+        public SendTeamGuestInvitation $sendTeamGuestInvitation
 
         // public SendTeamProjectAction $sendTeamProjectAction
     ){}
@@ -22,8 +25,15 @@ class InviteTeamUsersAction
 
         if (! empty($segregateUser['registered_user'])) {
 
-            $this->sendTeamInvitationAction->onQueue("team-invitation-{$team->id}")
+            $this->sendTeamInvitation->onQueue("team-invitation-{$team->id}")
             ->execute($segregateUser['registered_user'], $team);
+
+        }
+
+        if (! empty($segregateUser['non_register_user'])) {
+
+            $this->sendTeamGuestInvitation->onQueue("team-guest-invitation-{$team->id}")
+            ->execute($segregateUser['non_register_user'], $team);
 
         }
     }

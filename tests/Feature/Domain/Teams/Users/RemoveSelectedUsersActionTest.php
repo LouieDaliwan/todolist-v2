@@ -31,15 +31,16 @@ class RemoveSelectedUsersActionTest extends TestCase
         $this->assertCount(7, $team->users);
     }
 
-
     /** @test */
     function only_owner_can_remove_selected_user()
     {
         $team = TeamFactory::new()->withUsersCreate(10);
 
-        $user = $team->users()->skip(3)->first();
-
-        $this->signIn($user);
+        $this->signIn(
+            $team->users()
+            ->skip(3)
+            ->first()
+        );
 
         $this->put("/teams/{$team->id}/remove-users", [
             'users_id' => ['2', '5']
