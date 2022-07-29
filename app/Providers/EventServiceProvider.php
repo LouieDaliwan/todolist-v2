@@ -34,8 +34,11 @@ class EventServiceProvider extends ServiceProvider
     }
 
     protected $subscribe = [
+        //teams
         AttachOwner::class,
         RemoveUser::class,
+
+        //projects
         AttachMember::class,
     ];
 

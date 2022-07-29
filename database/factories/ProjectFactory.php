@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Database\Factories\Contract\Factory;
 use Domain\Projects\Models\Project;
+use Domain\Teams\Models\Team;
 
 class ProjectFactory extends Factory
 {
@@ -12,11 +13,12 @@ class ProjectFactory extends Factory
         return new self();
     }
 
-    public function create(array $extra =  [])
+    public function create(array $extra = [])
     {
         return Project::create(array_merge([
             'name' => 'Test Project',
-            'description' => 'Test Project Description'
+            'description' => 'Test Project Description',
+            'team_id' => null,
         ], $extra));
     }
 }

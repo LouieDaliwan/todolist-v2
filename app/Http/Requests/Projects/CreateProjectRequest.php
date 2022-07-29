@@ -26,6 +26,7 @@ class CreateProjectRequest extends FormRequest
         return [
             'name' => 'required',
             'description' => 'nullable',
+            'team_id' => 'required'
         ];
     }
 }
