@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Projects\CreateProjectsController;
+use App\Http\Controllers\Projects\ShareProjectsController;
 use App\Http\Controllers\Teams\CreateTeamController;
 use App\Http\Controllers\Teams\UpdateTeamController;
 use App\Http\Controllers\Teams\DeleteTeamController;
@@ -40,5 +41,6 @@ Route::middleware(['auth'])->group(function() {
 
     //for projects
     Route::post('/projects', CreateProjectsController::class);
+    Route::post('/projects/{project}/share', ShareProjectsController::class);
 });
 
