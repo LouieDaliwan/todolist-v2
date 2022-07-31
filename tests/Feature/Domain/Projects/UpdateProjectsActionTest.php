@@ -28,8 +28,6 @@ class UpdateProjectsActionTest extends TestCase
             'description' => $project->description
         ]);
 
-
         $this->assertNotEquals('Wrong Project', $project->fresh()->name);
-
     }
 }
