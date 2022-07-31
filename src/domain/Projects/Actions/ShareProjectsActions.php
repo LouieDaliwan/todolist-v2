@@ -15,11 +15,23 @@ class ShareProjectsActions
 
             $user = User::whereEmail($userEmail)->first();
 
-            $teams_id = $user->teams()->get()->pluck('id');
+            if ($user) {
+                $teams_id = $user->teams()->get()->pluck('id');
 
-            $is_not_team_member = $teams_id->isEmpty() ?  1 : in_array($project->team->id, $teams_id->toArray());
+                $is_not_team_member = $teams_id->isEmpty() ?  1 : in_array($project->team->id, $teams_id->toArray());
 
-            $project->users()->sync([$user->id => [
+
+            } else {
+                $user = User::create([
+                    'email' => $userEmail,
+                    'invitation_token' => bcrypt(config('invitationguest.token') . substr($userEmail, 1, 3)),
+                    'invitation_state' => 'Pending' //todo laravel spatie enum
+                ]);
+
+                $is_not_team_member = True;
+            }
+
+            $project->users()->attach([$user->id => [
                 'is_restricted' => $is_not_team_member
             ]]);
         });

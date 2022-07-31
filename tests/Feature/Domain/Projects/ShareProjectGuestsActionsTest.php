@@ -9,11 +9,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ShareProjectsActionTest extends TestCase
+class ShareProjectGuestsActionsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setup() : void
+    public function setup(): void
     {
         parent::setup();
 
@@ -31,34 +31,15 @@ class ShareProjectsActionTest extends TestCase
     }
 
     /** @test */
-    function it_share_the_project_on_members_of_selected_team()
+    function a_owner_can_share_a_project_for_non_registered_users()
     {
         $team = $this->createTeamWithMembers();
 
         $project = $this->createProjectWithMembers($team);
 
-        //Todo optimize this
-        $users_email = $team->users()->skip(1)->take(3)->get()
-        ->map(function($item) {
-            return $item->email;
-        })->toArray();
+        $this->post("/projects/{$project->id}/share", ['louie2@test.com']);
 
-
-        $this->post("/projects/{$project->id}/share", $users_email);
-
-        $this->assertCount(4, $project->fresh()->users);
-    }
-
-    /** @test */
-    function it_can_share_of_a_non_member_of_team_and_set_to_be_restricted()
-    {
-        $team = $this->createTeamWithMembers();
-
-        $project = $this->createProjectWithMembers($team);
-
-        $user = User::factory()->create();
-
-        $this->post("/projects/{$project->id}/share", [$user->email]);
+        $user = User::whereEmail('louie2@test.com')->first();
 
         $is_restricted = $project->users()->wherePivot('user_id', $user->id)
         ->first()
@@ -67,5 +48,7 @@ class ShareProjectsActionTest extends TestCase
 
         $this->assertTrue($is_restricted);
         $this->assertNull($team->users()->whereEmail($user->email)->first());
+        $this->assertNotNull($user->invitation_token);
+        $this->assertEquals('Pending', $user->invitation_state);
     }
 }
