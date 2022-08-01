@@ -5,7 +5,7 @@ namespace Domain\Teams\Actions;
 use App\Actions\SendTeamGuestInvitation;
 use App\Actions\SendTeamInvitation;
 use Domain\Teams\Models\Team;
-use Support\Teams\SegregateRegisteredAndNonUser;
+use Support\SegregateRegisteredAndNonUser;
 
 class InviteTeamUsersAction
 {
@@ -15,8 +15,6 @@ class InviteTeamUsersAction
         public SendTeamInvitation $sendTeamInvitation,
 
         public SendTeamGuestInvitation $sendTeamGuestInvitation
-
-        // public SendTeamProjectAction $sendTeamProjectAction
     ){}
 
     public function __invoke(array $attributes, Team $team)

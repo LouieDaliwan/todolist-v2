@@ -7,7 +7,7 @@ use App\Mail\TeamGuestInvitation;
 use Database\Factories\TeamFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
-use Support\Teams\SegregateRegisteredAndNonUser;
+use Support\SegregateRegisteredAndNonUser;
 use Tests\TestCase;
 
 class SendTeamGuestInvitationActionTest extends TestCase

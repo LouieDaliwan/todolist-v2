@@ -1,6 +1,6 @@
 <?php
 
-namespace Support\Teams;
+namespace Support;
 
 use App\Models\User;
 use Domain\Teams\Models\Team;
@@ -15,7 +15,6 @@ class SegregateRegisteredAndNonUser
         ];
 
         foreach ($attributes as $attribute) {
-
             $user = User::whereEmail($attribute)->first();
 
             if ($user) {
@@ -35,7 +34,6 @@ class SegregateRegisteredAndNonUser
                     'email' => $user->email,
                 ];
             }
-
         }
 
         return $temp_arr;

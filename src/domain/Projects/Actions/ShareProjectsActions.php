@@ -4,10 +4,13 @@ namespace Domain\Projects\Actions;
 
 use App\Models\User;
 use Domain\Projects\Models\Project;
+use Support\CreateUser;
 
 class ShareProjectsActions
 {
-    public function __construct(){}
+    public function __construct(
+        public CreateUser $createUser
+    ){}
 
     public function __invoke(Project $project, array $userEmails)
     {
@@ -19,16 +22,10 @@ class ShareProjectsActions
                 $teams_id = $user->teams()->get()->pluck('id');
 
                 $is_not_team_member = $teams_id->isEmpty() ?  1 : in_array($project->team->id, $teams_id->toArray());
-
-
             } else {
-                $user = User::create([
-                    'email' => $userEmail,
-                    'invitation_token' => bcrypt(config('invitationguest.token') . substr($userEmail, 1, 3)),
-                    'invitation_state' => 'Pending' //todo laravel spatie enum
-                ]);
+                $user = ($this->createUser)($userEmail);
 
-                $is_not_team_member = True;
+                $is_not_team_member = true;
             }
 
             $project->users()->attach([$user->id => [
