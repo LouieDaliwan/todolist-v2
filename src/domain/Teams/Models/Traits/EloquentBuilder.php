@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Teams\Models;
+namespace Domain\Teams\Models\Traits;
 
 use Domain\Teams\QueryBuilders\TeamQueryBuilder;
 
