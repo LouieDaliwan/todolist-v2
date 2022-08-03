@@ -4,6 +4,7 @@ use App\Http\Controllers\Projects\CreateProjectsController;
 use App\Http\Controllers\Projects\ShareProjectsController;
 use App\Http\Controllers\Projects\UpdateProjectsController;
 use App\Http\Controllers\Sections\CreateSectionsController;
+use App\Http\Controllers\Tasks\CreateSectionTasksController;
 use App\Http\Controllers\Teams\CreateTeamController;
 use App\Http\Controllers\Teams\UpdateTeamController;
 use App\Http\Controllers\Teams\DeleteTeamController;
@@ -40,12 +41,15 @@ Route::middleware(['auth'])->group(function() {
     ->middleware('auth.leaveTeam')
     ->name('leave-team');
 
-
     //for projects
     Route::post('/projects', CreateProjectsController::class);
     Route::put('/projects/{project}', UpdateProjectsController::class);
     Route::post('/projects/{project}/share', ShareProjectsController::class);
 
+    //for sections
     Route::post('/sections', CreateSectionsController::class);
+
+    //for tasks
+    Route::post('/sections/{section}/tasks', CreateSectionTasksController::class);
 });
 
