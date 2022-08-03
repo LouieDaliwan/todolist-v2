@@ -6,6 +6,12 @@ use Illuminate\Support\Collection;
 
 abstract class Factory
 {
+    public static function new(): self
+    {
+        return new self();
+    }
+
+
     abstract public function create(array $extra = []);
 
     public function times(int $times, array $extra = []): Collection
