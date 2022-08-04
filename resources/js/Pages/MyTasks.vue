@@ -5,6 +5,6 @@
 <template>
 
     <div>
-        Privacy Policy
+        <h2>My Tasks</h2>
     </div>
 </template>

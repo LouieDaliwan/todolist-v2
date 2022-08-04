@@ -4,6 +4,6 @@
 
 <template>
     <div>
-        <h1>Terms of Service</h1>
+        <h1>Home</h1>
     </div>
 </template>

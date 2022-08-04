@@ -1,20 +1,20 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 
-import Dashboard from '../Pages/Dashboard.vue';
-import PrivacyPolicy from '../Pages/PrivacyPolicy.vue';
-import TermsOfService from '../Pages/TermsOfService.vue';
+import Home from '../Pages/Home.vue';
+import Inbox from '../Pages/Inbox.vue';
+import MyTasks from '../Pages/MyTasks.vue';
 
 // vue.use(createRouter);
 
 const routes = [
-    { path: '/', component: Dashboard },
-    { path: '/privacy-policy', component: PrivacyPolicy },
-    { path: '/terms-of-service', component: TermsOfService },
+    { path: '/home', component: Home },
+    { path: '/inbox', component: Inbox },
+    { path: '/my-tasks', component: MyTasks },
 ];
 
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes, // short for `routes: routes`
 });
 

@@ -28,11 +28,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    return redirect('/dashboard');
+    return redirect('/home');
 });
 
 
-Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('home', DashboardController::class)->name('dashboard');
 
 Route::prefix('{lang?}')->group(function () {
     Route::get('/{any?}', DashboardController::class)->where('any', '.*');
