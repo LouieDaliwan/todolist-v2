@@ -10,11 +10,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        @routes
+        {{-- @routes --}}
         @vite('resources/js/app.js')
-        @inertiaHead
+        {{-- @inertiaHead --}}
     </head>
     <body class="font-sans antialiased">
-        @inertia
+        <div id="app"></div>
     </body>
 </html>

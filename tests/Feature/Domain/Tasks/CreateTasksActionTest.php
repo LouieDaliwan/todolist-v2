@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Domain\Tasks;
 
+use Database\Factories\ProjectFactory;
 use Database\Factories\SectionFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -30,6 +31,14 @@ class CreateTasksActionTest extends TestCase
     /** @test */
     function a_user_can_create_tasks_on_project()
     {
-        $this->markTestIncomplete();
+        $project = ProjectFactory::new()->create();
+
+        $section_project = SectionFactory::new()->createWithProject(['name' => 'Web Project'], $project);
+
+        $this->post("/sections/{$section_project->id}/tasks");
+
+        $this->assertDatabaseHas('section_tasks', [
+            'project_id' => $project->id
+        ]);
     }
 }

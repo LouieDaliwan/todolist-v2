@@ -13,7 +13,8 @@ class CreateSectionTasksController extends Controller
     {
         $section->tasks()->create([
             'name' => 'test',
-            'description' => 'test'
+            'description' => 'test',
+            'project_id' => $section->project_id
         ]);
 
         return $section;

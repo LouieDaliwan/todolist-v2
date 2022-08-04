@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->longText('description')->index();
+            $table->longText('description');
             $table->timestamps();
 
             $table->softDeletes();
