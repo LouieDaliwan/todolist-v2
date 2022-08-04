@@ -27,8 +27,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', DashboardController::class);
-Route::get('/{any}', DashboardController::class);
+Route::get('/', function() {
+    return redirect('/dashboard');
+});
+
+
+Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+Route::prefix('{lang?}')->group(function () {
+    Route::get('/{any?}', DashboardController::class)->where('any', '.*');
+});
+
+
 
 
 Route::middleware(['auth'])->group(function() {

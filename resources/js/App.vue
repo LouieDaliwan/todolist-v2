@@ -1,10 +1,14 @@
+<script setup>
+
+</script>
+
 <template>
-    <h1>Test</h1>
+    <router-link to="/">Dashboard</router-link>
+    <router-link to="/privacy-policy">Privacy Policy</router-link>
+    <router-link to="/terms-of-service">Terms of Service</router-link>
+
+    <router-view></router-view>
 </template>
 
 
-<script>
-    export default {
-        name: 'App',
-    }
-</script>
+
