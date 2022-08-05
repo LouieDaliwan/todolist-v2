@@ -1,5 +1,6 @@
 <script setup>
-
+    import Priorities from './HomeCards/Priorities.vue'
+    import Projects from './HomeCards/Projects.vue'
 </script>
 
 <template>
@@ -18,7 +19,7 @@
         </div>
 
 
-        <div class="w-full">
+        <div class="w-full mb-5">
             <div class="
                 w-[30%] h-[40px] pt-[8px] flex justify-center rounded-[60px] bg-slate-600 mx-auto
                 pl-[4px] pr-[4px]
@@ -28,6 +29,12 @@
                 <h1 class="text-white text-md">1 collaborator</h1>
             </div>
         </div>
-    </div>
 
+        <div class="w-full">
+            <div class="flex justify-center gap-4">
+                <Priorities></Priorities>
+                <Projects></Projects>
+            </div>
+        </div>
+    </div>
 </template>
