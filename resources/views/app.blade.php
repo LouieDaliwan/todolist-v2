@@ -11,9 +11,9 @@
 
         <!-- Scripts -->
         @vite('resources/js/app.js')
-        
+
     </head>
-    <body class="font-sans antialiased">
+    <body>
         <div id="app" v-cloak></div>
     </body>
 </html>

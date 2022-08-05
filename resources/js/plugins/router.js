@@ -4,12 +4,11 @@ import Home from '../Pages/Home.vue';
 import Inbox from '../Pages/Inbox.vue';
 import MyTasks from '../Pages/MyTasks.vue';
 
-// vue.use(createRouter);
-
 const routes = [
     { path: '/home', component: Home },
     { path: '/inbox', component: Inbox },
     { path: '/my-tasks', component: MyTasks },
+    // { path: '/:pathMatch(.*)', component: NotFoundComponent }
 ];
 
 const router = createRouter({
