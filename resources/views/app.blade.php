@@ -8,6 +8,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link href="/css/app.css" rel="stylesheet">
+        <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+
 
         <!-- Scripts -->
         @vite('resources/js/app.js')

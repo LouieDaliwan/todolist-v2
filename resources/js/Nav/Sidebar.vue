@@ -1,5 +1,5 @@
 <template>
-    <aside class="w-64 " aria-label="Sidebar">
+    <aside class="w-[240px] " aria-label="Sidebar">
         <div class="overflow-y-auto py-4 px-3 bg-gray-50 h-full rounded dark:bg-gray-800 ">
             <div class="mb-5 ml-3 flex p-3">
                 <h2 class="text-white">Logo</h2>
